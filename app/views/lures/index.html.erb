@@ -1,0 +1,39 @@
+<h1>Listing lures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Genre</th>
+      <th>Kind</th>
+      <th>Maker</th>
+      <th>Price</th>
+      <th>Weight</th>
+      <th>Buy link</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lures.each do |lure| %>
+      <tr>
+        <td><%= lure.name %></td>
+        <td><%= lure.genre %></td>
+        <td><%= lure.kind %></td>
+        <td><%= lure.maker.name %></td>
+        <td><%= lure.price %></td>
+        <td><%= lure.weight %></td>
+        <td><%= lure.buy_link %></td>
+        <td><%= link_to 'Show', lure %></td>
+        <td><%= link_to 'Edit', edit_lure_path(lure) %></td>
+        <td><%= link_to 'Destroy', lure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lure', new_lure_path %>

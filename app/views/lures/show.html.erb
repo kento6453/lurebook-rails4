@@ -1,0 +1,39 @@
+<!-- <p id="notice"><%= notice %></p> -->
+
+<p>
+  <strong>Name:</strong>
+  <%= @lure.name %>
+</p>
+
+<p>
+  <strong>Genre:</strong>
+  <%= @lure.genre %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @lure.kind %>
+</p>
+
+<p>
+  <strong>Maker:</strong>
+  <%= @lure.maker.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @lure.price %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @lure.weight %>
+</p>
+
+<p>
+  <strong>Buy link:</strong>
+  <%= @lure.buy_link %>
+</p>
+
+<%= link_to 'Edit', edit_lure_path(@lure) %> |
+<%= link_to 'Back', lures_path %>

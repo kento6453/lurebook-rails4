@@ -1,0 +1,45 @@
+<%= form_for(@lure) do |f| %>
+  <% if @lure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lure.errors.count, "error") %> prohibited this lure from being saved:</h2>
+
+      <ul>
+      <% @lure.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :genre %><br>
+    <%= f.select :genre , [["seabass", "seabass"],["bass", "bass"]] %>
+  </div>
+  <div class="field">
+    <%= f.label :kind %><br>
+    <%= f.select :kind, [["フローティングミノー","フローティングミノー"],["バイブレーション","バイブレーション"],["シンキングペンシル","シンキングペンシル"]] %>
+  </div>
+  <div class="field">
+    <%= f.label :maker %><br>
+    <%= f.collection_select :maker_id, Maker.all, :id, :name %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br>
+    <%= f.number_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :buy_link %><br>
+    <%= f.text_field :buy_link %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

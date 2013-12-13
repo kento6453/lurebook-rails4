@@ -1,0 +1,13 @@
+<div id="header">
+  <h1><%= link_to image_tag('http://www.logomaker.com/logo-images/cc4c2c102da6f6ea.gif', :alt => 'Lurebook'), root_path %></h1>
+  <a href="http://www.logomaker.com"><img src="http://www.logomaker.com/images/logos.gif" alt="logo maker logo creator" border="0"/></a>
+
+  
+　<%= link_to 'TOP', root_path %>
+　<%= link_to 'ルアー登録', [ :new, :lure ] %>
+　<%= link_to 'メーカー登録', [ :new, :maker ] %>
+　<%= link_to 'メーカー一覧',  makers_path %>
+　<%= link_to 'ユーザ一覧',  users_path  %>
+  <%= link_to('ログアウト', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') if current_user %>
+  
+</div>

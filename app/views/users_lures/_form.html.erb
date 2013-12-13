@@ -1,0 +1,49 @@
+<%= form_for(@users_lure) do |f| %>
+  <% if @users_lure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@users_lure.errors.count, "error") %> prohibited this users_lure from being saved:</h2>
+
+      <ul>
+      <% @users_lure.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <div class="field">
+    <%= f.label :lure_id %><br>
+    <%= f.collection_select :lure_id, Lure.all, :id, :name %>
+    
+  </div>
+  <div class="field">
+    <%= f.label :method %><br>
+    <%= f.text_field :method %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br>
+    <%= f.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :priority %><br>
+    <%= f.text_field :priority %>
+  </div>
+  <div class="field">
+    <%= f.label :color %><br>
+    <%= f.text_field :color %>
+  </div>
+  <div class="field">
+    <%= f.label :field %><br>
+    <%= f.text_field :field %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br>
+    <%= f.text_field :photo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
