@@ -1,51 +1,94 @@
-<% if !current_user then %>
-<p><%= link_to 'ログイン', [ :new, :user_session ] %></p>
-<p><%= link_to 'ユーザー登録', [ :new, :user_registration ] %></p>
-<p><%= link_to 'パスワード再発行', [ :new, :user_password ] %></p>
-<% end %>
+<div class="jumbotron hero-spacer">
+  <% if !current_user then %>
+  <h1><%= image_tag('http://www.logomaker.com/logo-images/cc4c2c102da6f6ea.gif', :size => "85x85" ,:alt => 'Lurebook') %>The Best Lure Practices</h1>    
+  <p>あなたの持っているルアーを共有しちゃいましょう！</p>
+  <p><%= link_to 'ログイン', [ :new, :user_session ], :class => "btn btn-primary btn-large" %></p>
+  <p><%= link_to 'ユーザー登録', [ :new, :user_registration ], :class => "btn btn-primary btn-large"  %></p>
+  <p><%= link_to 'パスワード再発行', [ :new, :user_password ], :class => "btn btn-primary btn-large"  %></p>
+  <% else %>
+  <div class="bs-top-callout">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9">
+          <p class='lead'>Please regist your lure practices.</p>
+        </div>
+        <div class="col-md-3">
+          <div id="social-sharing">
+            <p><%= link_to '自分のルアーを登録', new_users_lure_path, :class => "btn btn-primary btn-large"  %></p>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <% end %>
 
-<% if current_user then %>
-<h2><%= @user.email %>さんのLurebook</h2>
-<p><%= link_to '自分のルアーを登録', new_users_lure_path %></p>
-<table>
-    <th>Lure</th>
-    <th>Method</th>
-    <th>Comment</th>
-    <th>Priority</th>
-    <th>Color</th>
-    <th>Field</th>
-    <th>Photo</th>
-    <th></th>
-    <th></th>
-<% @lures.each do |lure| %>
-  <tr> 
-    <td><%= lure.lure.name %></td>
-    <td><%= lure.method %></td>
-    <td><%= lure.comment %></td>
-    <td><%= lure.priority %></td>
-    <td><%= lure.color %></td>
-    <td><%= lure.field %></td>
-    <td><%= lure.photo %></td>
-    <td><%= link_to 'Edit', edit_users_lure_path(lure) %></td>
-    <td><%= link_to 'Destroy', lure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>  
-<% end %>
+</div>
 
-<h2>同じルアーを持っているアングラー</h2>
-<table>
-  <th>名前</th>
-  <th>ルアー</th>
-  <th>メソッド</th>
-  <th>エリア</th>
-<% @same_lure_users.each do |same_lure_user| %>
-  <tr>
-    <td><%= same_lure_user.user.email %></td>
-    <td><%= same_lure_user.lure.name %></td>
-    <td><%= same_lure_user.method %></td>
-    <td><%= same_lure_user.field %></td>
-  </tr>
+<div class="row">
+  <div class="col-lg-12">
+    <% if current_user then %>
+    <h3><%= @user.email %>さんのLurebook</h3>
+    <% end %>
+  </div>
+</div><!-- /.row -->
+
+<!-- Lure List -->
+<div class="row text-center">
   
-<% end %>
+<% if current_user then %>
+
+  <% @lures.each do |lure| %>
+  <div class="col-lg-3 col-md-4 hero-feature">
+    <div class="thumbnail">
+      <img src="http://placehold.it/800x500" alt="">
+      <div class="caption">
+        <h3><%= lure.lure.name %></h3>
+        <p><%= lure.method %> <%= lure.comment %></p>
+        <p><%= lure.comment %></p>
+        <p><%= lure.priority %></p>
+        <p><%= lure.color %></p>
+        <p><%= lure.field %></p>
+        <p><%= lure.photo %></p>
+        <p><%= link_to 'Edit', edit_users_lure_path(lure), :class => "btn btn-primary" %> <%= link_to 'Destroy', lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></p>
+      </div>
+    </div>
+  </div>
+  
+  <% end %>
+  
+</div><!-- /.row -->
+<!-- /Lure List -->
+<hr>
+  
+<div class="row">
+  <div class="col-lg-12">
+    <h3>同じルアーを持っているアングラー</h3>
+  </div>
+</div><!-- /.row -->  
+
+<!-- Same Lure List -->
+<div class="row text-center">
+
+  <table class="table">
+    <thead>
+      <tr><th>Email</th><th>Lure Name</th><th>Method</th><th>Field</th></tr>
+    </thead>
+    <tbody>
+    <% @same_lure_users.each do |same_lure_user| %>  
+    <tr>
+      <td><%= same_lure_user.user.email %></td>
+      <td><%= same_lure_user.lure.name %></td>
+      <td><%= same_lure_user.method %></td>
+      <td><%= same_lure_user.field %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  
 </table>
+
+</div><!-- /.row --><!-- Same Lure List -->
+
+<% end %>
+
+<hr>
+
