@@ -1,43 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
-  <%= @users_lure.user.email %>
+  <strong>Email:</strong>
+  <%= @user.email %>
 </p>
 
 <p>
-  <strong>Lure:</strong>
-  <%= @users_lure.lure.name %>
+  <%= image_tag @user.avatar.url(:thumb) %>
 </p>
 
-<p>
-  <strong>Method:</strong>
-  <%= @users_lure.method %>
-</p>
 
-<p>
-  <strong>Comment:</strong>
-  <%= @users_lure.comment %>
-</p>
-
-<p>
-  <strong>Priority:</strong>
-  <%= @users_lure.priority %>
-</p>
-
-<p>
-  <strong>Color:</strong>
-  <%= @users_lure.color %>
-</p>
-<p>
-  <strong>Field:</strong>
-  <%= @users_lure.field %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <%= @users_lure.photo %>
-</p>
-
-<%= link_to 'Edit', edit_users_lure_path(@users_lure) %> |
-<%= link_to 'Back', users_lures_path %>
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

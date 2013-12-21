@@ -1,39 +1,63 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<div class="page-header">
+  <h1><%= @lure.name %>（<%= @lure.maker.name %>）</h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @lure.name %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li><%= link_to '登録ルアー一覧', lures_path  %></li>
+  <li class="active"><%= @lure.name %></li>
+</ol>
 
-<p>
-  <strong>Genre:</strong>
-  <%= @lure.genre %>
-</p>
+<% if notice %>
+    <div id="notice" class="alert alert-success"><%= notice %></div>
+<% end %>
 
-<p>
-  <strong>Kind:</strong>
-  <%= @lure.kind %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Maker:</strong>
-  <%= @lure.maker.name %>
-</p>
+  <div class="col-md-6">
+    <p>
+      <%= image_tag @lure.photo.url, :width => '450', :class => 'img-thumbnail' %>
+    </p>
+  </div>
 
-<p>
-  <strong>Price:</strong>
-  <%= @lure.price %>
-</p>
+  <div class="col-md-6">
 
-<p>
-  <strong>Weight:</strong>
-  <%= @lure.weight %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-heading">ジャンル</div>
+      <div class="panel-body"><%= @lure.genre %></div>
+    </div>
 
-<p>
-  <strong>Buy link:</strong>
-  <%= @lure.buy_link %>
-</p>
+    <div class="panel panel-default">
+      <div class="panel-heading">種類</div>
+      <div class="panel-body"><%= @lure.kind %></div>
+    </div>
 
-<%= link_to 'Edit', edit_lure_path(@lure) %> |
-<%= link_to 'Back', lures_path %>
+    <div class="panel panel-default">
+      <div class="panel-heading">価格</div>
+      <div class="panel-body"><%= number_with_delimiter @lure.price %> 円</div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">重量</div>
+      <div class="panel-body"><%= @lure.weight %> g</div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">購入リンク</div>
+      <div class="panel-body"><%= @lure.buy_link %>g</div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-block">
+      <ul class="list-inline">
+        <li><%= link_to '<span class="glyphicon glyphicon-pencil"></span> 変更する'.html_safe, edit_lure_path(@lure), :class => 'btn btn-primary' %></li>
+        <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, root_path, :class => 'btn btn-default' %></li>
+      </ul>
+    </div>
+  </div>
+</div>

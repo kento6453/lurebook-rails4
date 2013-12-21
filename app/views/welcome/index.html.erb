@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <p class='lead'>Please regist your lure practices.</p>
+          <p class='lead'>あなたのルアー、そのルアーの使い方を登録しましょう！</p>
         </div>
         <div class="col-md-3">
           <div id="social-sharing">
@@ -27,34 +27,65 @@
 <div class="row">
   <div class="col-lg-12">
     <% if current_user then %>
+        <h3>最近登録されたルアー</h3>
+    <% end %>
+  </div>
+</div><!-- /.row -->
+
+<div class="row text-center">
+<% @new_users_lures.each do |new_lure| %>
+    <div class="col-lg-3 col-md-4 hero-feature">
+      <div class="thumbnail">
+        <%= image_tag new_lure.photo.url(:medium), :alt => new_lure.lure.name, :size => '800x500' %>
+        <div class="caption">
+          <h3><%= new_lure.lure.name %> (<%= new_lure.user.name %>さん)</h3>
+          <p>使い方：<%= new_lure.method %></p>
+          <p>コメント：<%= new_lure.comment %></p>
+          <p>頻度：<%= new_lure.priority %></p>
+          <p>カラー：<%= new_lure.color %></p>
+          <p>フィールド：<%= new_lure.field %></p>
+          <p>
+            <%= link_to 'Like!', new_lure.lure.buy_link, :class => "btn btn-primary" %>
+            <%= link_to 'Get!', new_lure.lure.buy_link, :class => "btn btn-primary" %>
+            <%= link_to 'Buy', new_lure.lure.buy_link, :class => "btn btn-primary" %>
+          </p>
+        </div>
+      </div>
+    </div>
+<% end %>
+</div>
+
+
+<!-- My Lure -->
+<div class="row">
+  <div class="col-lg-12">
+    <% if current_user then %>
     <h3><%= @user.email %>さんのLurebook</h3>
     <% end %>
   </div>
 </div><!-- /.row -->
 
-<!-- Lure List -->
+<!-- My Lure List -->
 <div class="row text-center">
   
 <% if current_user then %>
 
-  <% @lures.each do |lure| %>
-  <div class="col-lg-3 col-md-4 hero-feature">
-    <div class="thumbnail">
-      <img src="http://placehold.it/800x500" alt="">
-      <div class="caption">
-        <h3><%= lure.lure.name %></h3>
-        <p><%= lure.method %> <%= lure.comment %></p>
-        <p><%= lure.comment %></p>
-        <p><%= lure.priority %></p>
-        <p><%= lure.color %></p>
-        <p><%= lure.field %></p>
-        <p><%= lure.photo %></p>
-        <p><%= link_to 'Edit', edit_users_lure_path(lure), :class => "btn btn-primary" %> <%= link_to 'Destroy', lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></p>
-      </div>
-    </div>
-  </div>
-  
-  <% end %>
+      <% @my_lures.each do |my_lure| %>
+          <div class="col-lg-3 col-md-4 hero-feature">
+            <div class="thumbnail">
+              <%= image_tag my_lure.photo.url(:medium), :size => '800x500', :alt => my_lure.lure.name %>
+              <div class="caption">
+                <h3><%= my_lure.lure.name %></h3>
+                <p><%= my_lure.method %> <%= my_lure.comment %></p>
+                <p><%= my_lure.comment %></p>
+                <p><%= my_lure.priority %></p>
+                <p><%= my_lure.color %></p>
+                <p><%= my_lure.field %></p>
+                <p><%= link_to 'Edit', edit_users_lure_path(my_lure), :class => "btn btn-primary" %> <%= link_to 'Destroy', my_lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></p>
+              </div>
+            </div>
+          </div>
+      <% end %>
   
 </div><!-- /.row -->
 <!-- /Lure List -->
@@ -68,7 +99,6 @@
 
 <!-- Same Lure List -->
 <div class="row text-center">
-
   <table class="table">
     <thead>
       <tr><th>Email</th><th>Lure Name</th><th>Method</th><th>Field</th></tr>
@@ -76,14 +106,14 @@
     <tbody>
     <% @same_lure_users.each do |same_lure_user| %>  
     <tr>
-      <td><%= same_lure_user.user.email %></td>
+      <td><%= same_lure_user.user.name %></td>
       <td><%= same_lure_user.lure.name %></td>
       <td><%= same_lure_user.method %></td>
       <td><%= same_lure_user.field %></td>
+      <td><%= image_tag same_lure_user.user.avatar.url(:thumb) %></td>
     </tr>
     <% end %>
     </tbody>
-  
 </table>
 
 </div><!-- /.row --><!-- Same Lure List -->

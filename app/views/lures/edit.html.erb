@@ -1,4 +1,11 @@
-<h1>Editing lure</h1>
+<div class="page-header">
+  <h1>ルアースペックの変更</h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active"><%= @lure.name %>の変更（<%= current_user.name %>さん）</li>
+</ol>
 
 <%= render 'form' %>
 

@@ -50,3 +50,10 @@ gem 'debugger', group: [:development, :test]
 
 # Use devise
 gem 'devise'
+
+# for JavaScript runtime error
+gem 'execjs'
+gem 'therubyracer'
+
+# User paperclip for image uploading function :require ImageMagick (> yum install ImageMagick)
+gem 'paperclip'

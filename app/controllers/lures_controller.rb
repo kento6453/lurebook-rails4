@@ -69,6 +69,6 @@ class LuresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lure_params
-      params.require(:lure).permit(:name, :genre, :kind, :maker_id, :price, :weight, :buy_link)
+      params.require(:lure).permit(:name, :genre, :kind, :maker_id, :price, :weight, :buy_link, :photo)
     end
 end

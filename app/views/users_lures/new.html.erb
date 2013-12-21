@@ -1,5 +1,10 @@
-<h1>New users_lure</h1>
+<h1>新規登録 - あなたのルアー</h1>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active">新規登録（<%= current_user.name %>さん）</li>
+</ol>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', users_lures_path %>
+<%= link_to 'Back', root_path, :class => "btn btn-default" %>

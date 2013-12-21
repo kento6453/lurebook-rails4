@@ -1,0 +1,31 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（再入力）
+        remember_me: 次回からパスワード入力を省く      
+      lure:
+        name:     ルアー
+        genre:    ジャンル
+        kind:     種類
+        maker: メーカー
+        price:     価格
+        weight:    重量
+        buy_link:  購入リンク
+      maker:
+        name:     メーカー名
+        web_url:    WEBサイト
+        logo:     ロゴ
+      users_lure:
+        user_id:     ユーザー
+        lure_id:     ルアー
+        method:    使い方
+        comment:    コメント     
+        priority: 使用頻度
+        color:     カラー
+        field:    使用フィールド
+        photo:    写真
+        
+      

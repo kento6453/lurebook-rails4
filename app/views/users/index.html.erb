@@ -3,15 +3,19 @@
 <table>
   <thead>
     <tr>
-      <th>email</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Avatar</th>
+      
     </tr>
   </thead>
 
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= user.name  %></td>
         <td><%= user.email %></td>
-        
+        <td><%= image_tag user.avatar.url(:thumb) %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
       </tr>
@@ -21,4 +25,3 @@
 
 <br>
 
-<%= link_to 'New Users lure', new_users_lure_path %>

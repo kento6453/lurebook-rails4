@@ -21,4 +21,8 @@ class Lure < ActiveRecord::Base
 
   # TODO: genreとmakerにリスト値以外入らないようにする
 
+  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png" 
+  validates_attachment :photo, presence: true
+  validates_with AttachmentPresenceValidator, :attributes => :photo
+  
 end

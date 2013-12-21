@@ -1,6 +1,18 @@
-<h1>Editing users_lure</h1>
+<div class="page-header">
+<h1>編集 - あなたのルアー</h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active"><%= @users_lure.lure.name %>（<%= @users_lure.user.name %>さん）</li>
+</ol>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @users_lure %> |
-<%= link_to 'Back', users_lures_path %>
+
+<div class="col-md-12">
+    <p class="text-left">
+    <%= link_to 'Show', @users_lure, :class => 'btn btn-link' %>
+    <%= link_to 'Back', users_lures_path, :class => 'btn btn-link' %>
+    </p>
+</div>

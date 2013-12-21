@@ -1,4 +1,6 @@
-<%= form_for(@maker) do |f| %>
+<%= form_for (@maker), :html => {:class => 'form'} do |f| %>
+<fieldset>
+
   <% if @maker.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@maker.errors.count, "error") %> prohibited this maker from being saved:</h2>
@@ -11,19 +13,26 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => 'form-control', :placeholder => 'DAIWA' %>
+    <p class="help-block">メーカー名は、社名ではなく、ルアーメーカーとしてのブランド名で登録お願いします。</p>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :web_url %><br>
-    <%= f.text_field :web_url %>
+    <%= f.text_field :web_url, :class => 'form-control', :placeholder => 'http://daiwa.globeride.co.jp/' %>
+    <p class="help-block">ルアーメーカーのWEBサイトがあれば、URL（アドレス）を入力してください。</p>
   </div>
-  <div class="field">
-    <%= f.label :logo %><br>
-    <%= f.text_field :logo %>
+  <div class="form-group">
+    <%= f.label :logo %><br />
+    <%= f.file_field :logo %>
+    <p class="help-block">アップする画像を選択してください。メーカーサイトなどでロゴ画像をダウンロードして指定お願いします。</p>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <br>
+
+  <%= f.button '<span class="glyphicon glyphicon-floppy-disk"></span> 保存する'.html_safe ,:class => "btn btn-primary" %>
+
+</fieldset>
+
 <% end %>

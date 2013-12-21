@@ -12,7 +12,7 @@
 
 <p>
   <strong>Logo:</strong>
-  <%= @maker.logo %>
+  <%= @maker.logo.url(:medium) %>
 </p>
 
 <%= link_to 'Edit', edit_maker_path(@maker) %> |

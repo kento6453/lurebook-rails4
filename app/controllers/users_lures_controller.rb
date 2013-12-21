@@ -28,7 +28,7 @@ class UsersLuresController < ApplicationController
 
     respond_to do |format|
       if @users_lure.save
-        format.html { redirect_to @users_lure, notice: 'UsersLure was successfully created.' }
+        format.html { redirect_to @users_lure, notice: 'ルアーが登録されました！' }
         format.json { render action: 'show', status: :created, location: @users_lure }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class UsersLuresController < ApplicationController
   def update
     respond_to do |format|
       if @users_lure.update(users_lure_params)
-        format.html { redirect_to root_path, notice: 'UsersLure was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'ルアーの登録情報が変更されました！' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

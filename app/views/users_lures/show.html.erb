@@ -1,43 +1,61 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><%= @users_lure.lure.name %>（<%= @users_lure.user.name %>さん）</h1>
+</div>
 
-<p>
-  <strong>User:</strong>
-  <%= @users_lure.user.email %>
-</p>
+  <ol class="breadcrumb">
+    <li><%= link_to 'Top', root_path  %></li>
+    <li class="active"><%= @users_lure.lure.name %>（<%= @users_lure.user.name %>さん）</li>
+  </ol>
 
-<p>
-  <strong>Lure:</strong>
-  <%= @users_lure.lure.name %>
-</p>
+<% if notice %>
+    <div id="notice" class="alert alert-success"><%= notice %></div>
+<% end %>
 
-<p>
-  <strong>Method:</strong>
-  <%= @users_lure.method %>
-</p>
+<div class="row">
 
-<p>
-  <strong>Comment:</strong>
-  <%= @users_lure.comment %>
-</p>
+    <div class="col-md-6">
+      <p>
+        <%= image_tag @users_lure.photo.url, :width => '450', :class => 'img-thumbnail' %>
+      </p>
+    </div>
 
-<p>
-  <strong>Priority:</strong>
-  <%= @users_lure.priority %>
-</p>
+    <div class="col-md-6">
 
-<p>
-  <strong>Color:</strong>
-  <%= @users_lure.color %>
-</p>
-<p>
-  <strong>Field:</strong>
-  <%= @users_lure.field %>
-</p>
+      <div class="panel panel-default">
+        <div class="panel-heading">使い方</div>
+        <div class="panel-body"><%= @users_lure.method %></div>
+      </div>
 
-<p>
-  <strong>Photo:</strong>
-  <%= @users_lure.photo %>
-</p>
+      <div class="panel panel-default">
+        <div class="panel-heading">コメント</div>
+        <div class="panel-body"><%= @users_lure.comment %></div>
+      </div>
 
-<%= link_to 'Edit', edit_users_lure_path(@users_lure) %> |
-<%= link_to 'Back', users_lures_path %>
+      <div class="panel panel-default">
+        <div class="panel-heading">利用頻度</div>
+        <div class="panel-body"><%= @users_lure.priority %></div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">カラー</div>
+        <div class="panel-body"><%= @users_lure.color %></div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">利用エリア</div>
+        <div class="panel-body"><%= @users_lure.field %></div>
+      </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+      <div class="btn-block">
+        <ul class="list-inline">
+            <li><%= link_to '<span class="glyphicon glyphicon-pencil"></span> 変更する'.html_safe, edit_users_lure_path(@users_lure), :class => 'btn btn-primary' %></li>
+            <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, root_path, :class => 'btn btn-default' %></li>
+        </ul>
+      </div>
+    </div>
+</div>

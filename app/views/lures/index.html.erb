@@ -9,6 +9,7 @@
       <th>Maker</th>
       <th>Price</th>
       <th>Weight</th>
+      <th>Photo</th>
       <th>Buy link</th>
       <th></th>
       <th></th>
@@ -25,7 +26,8 @@
         <td><%= lure.maker.name %></td>
         <td><%= lure.price %></td>
         <td><%= lure.weight %></td>
-        <td><%= lure.buy_link %></td>
+        <td><%= image_tag lure.photo.url(:thumb) %></td>
+        <td><%= link_to '購入', lure.buy_link %></td>
         <td><%= link_to 'Show', lure %></td>
         <td><%= link_to 'Edit', edit_lure_path(lure) %></td>
         <td><%= link_to 'Destroy', lure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
