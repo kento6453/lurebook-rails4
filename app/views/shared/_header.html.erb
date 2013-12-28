@@ -18,7 +18,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-            <li><%= link_to('myルアー', {:controller => 'mylure' }, :class => 'signOut') %></li>
+            <li><%= link_to('myルアーボックス', {:controller => 'mylure' }, :class => 'signOut') %></li>
             <li><%= link_to(current_user.name, user_path(current_user), :class => 'signOut') %></li>
             <li><%= link_to('ログアウト', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') %></li>
         <% else %>
@@ -33,4 +33,3 @@
 
 </nav>
 
-<div class="container">

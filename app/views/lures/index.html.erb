@@ -41,7 +41,7 @@
   <tbody>
     <% @lures.each do |lure| %>
       <tr>
-        <td><%= image_tag lure.photo.url(:thumb) %><br><%= link_to(lure.name, lure) %></td>
+        <td><%= link_to image_tag(lure.photo.url(:thumb)), lure %><br><%= link_to(lure.name, lure) %></td>
         <td><%= lure.genre_name %><br><%= lure.kind_name %></td>
         <td><%= lure.maker.name %></td>
         <td><%= lure.action %></td>

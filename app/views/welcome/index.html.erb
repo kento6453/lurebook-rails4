@@ -7,10 +7,23 @@
 <% else %>
   <div class="page-header">
     <h1><%= current_user.name %>さんの<%= image_tag('http://www.logomaker.com/logo-images/6a27bd42bcf9ddf7.gif', :size => "60x60" ,:alt => 'Lurebook') %></h1>
+    <% if current_user.avatar == "" or current_user.profile == "" then %>
+        <div id="row">
+          <div class="alert alert-info">
+            <p><%= link_to(current_user.name + 'さんのアバター、プロファイルを登録しませんか？', user_path(current_user), :class => 'btn btn-link') %></p>
+          </div>
+        </div>
+    <% end %>
       <div id="row">
+        <div class="alert alert-info">
+          <p>まずは［ルアーを登録」でカタログにルアーを登録　⇒　次に［myルアーを登録］でmyルアーボックスにルアー追加しましょう！</p>
+        </div>
+      </div>
+
+      <div id="row">
+        <%= link_to 'ルアーを登録', new_lure_path, :class => "btn btn-primary btn-sm" %>
         <%= link_to 'myルアーを登録', new_users_lure_path, :class => "btn btn-primary btn-sm"  %>
-        <%= link_to 'カタログを見る', lures_path, :class => "btn btn-default btn-sm"  %>
-        <%= link_to 'myルアーを見る', mylure_path, :class => "btn btn-default btn-sm"  %>
+        <%= link_to 'カタログを見る', lures_path, :class => "btn btn-default btn-sm" %>
       </div>
   </div>
 <% end %>

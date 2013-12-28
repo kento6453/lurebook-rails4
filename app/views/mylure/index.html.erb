@@ -1,0 +1,107 @@
+<div class="page-header">
+  <h1>myルアー</h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li><%= link_to '登録ルアー一覧', lures_path  %></li>
+  <li class="active"><%= current_user.name %>さんのルアー</li>
+</ol>
+
+<% if notice %>
+    <div id="notice" class="alert alert-success"><%= notice %></div>
+<% end %>
+
+<%= link_to '新しいルアーを登録する', new_users_lure_path, :class =>  'btn btn-primary' %>
+
+<h2>一軍ルアー</h2>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>ルアー</th>
+    <th>使い方</th>
+    <th>コメント</th>
+    <th>カラー</th>
+    <th>エリア</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @my_lures_1st.each do |my_lure| %>
+      <tr>
+        <td><%= link_to image_tag(my_lure.photo.url(:thumb)) + my_lure.lure.name, my_lure %></td>
+        <td><%= my_lure.method %></td>
+        <td><%= my_lure.comment %></td>
+        <td><%= my_lure.color %></td>
+        <td><%= my_lure.field %></td>
+        <td><%= link_to '変更する', edit_users_lure_path(my_lure), :class => 'btn btn-primary' %></td>
+        <td><%= link_to '削除する', my_lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>二軍ルアー</h2>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>ルアー</th>
+    <th>使い方</th>
+    <th>コメント</th>
+    <th>カラー</th>
+    <th>エリア</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @my_lures_2nd.each do |my_lure| %>
+      <tr>
+        <td><%= link_to image_tag(my_lure.photo.url(:thumb)) + my_lure.lure.name, my_lure %></td>
+        <td><%= my_lure.method %></td>
+        <td><%= my_lure.comment %></td>
+        <td><%= my_lure.color %></td>
+        <td><%= my_lure.field %></td>
+        <td><%= link_to '変更する', edit_users_lure_path(my_lure), :class => 'btn btn-primary' %></td>
+        <td><%= link_to '削除する', my_lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>押入れルアー</h2>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>ルアー</th>
+    <th>使い方</th>
+    <th>コメント</th>
+    <th>カラー</th>
+    <th>エリア</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @my_lures_3rd.each do |my_lure| %>
+      <tr>
+        <td><%= link_to image_tag(my_lure.photo.url(:thumb)) + my_lure.lure.name, my_lure %></td>
+        <td><%= my_lure.method %></td>
+        <td><%= my_lure.comment %></td>
+        <td><%= my_lure.color %></td>
+        <td><%= my_lure.field %></td>
+        <td><%= link_to '変更する', edit_users_lure_path(my_lure), :class => 'btn btn-primary' %></td>
+        <td><%= link_to '削除する', my_lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新しいルアーを登録する', new_users_lure_path, :class =>  'btn btn-primary' %>
+
