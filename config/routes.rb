@@ -1,19 +1,23 @@
 Lurebook::Application.routes.draw do
 
-  root 'welcome#index'  
+  root 'welcome#index'
 
   resources :users_lures
 
   get "welcome/index"
+
   devise_for :users
-  get 'users_lures', :to => 'users_lures#index', :as => :user_root 
+  get 'mylure', :to => 'mylure#index', :as => :user_root
 
   resources :makers
 
+  resources :users
+
   resources :lures
 
-  resources :users
-  
+  get "mylure" => 'mylure#index'
+
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

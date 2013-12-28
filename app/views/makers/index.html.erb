@@ -1,12 +1,20 @@
-<h1>Listing makers</h1>
+<div class="page-header">
+  <h1>メーカー一覧</h1>
+</div>
 
-<table>
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active">メーカー一覧</li>
+</ol>
+
+<%= link_to '登録されていないメーカーを登録', new_maker_path, :class => 'btn btn-primary' %>
+
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Web url</th>
-      <th>Logo</th>
-      <th></th>
+      <th>ロゴ</th>
+      <th>メーカー名</th>
+      <th>WEBサイト</th>
       <th></th>
       <th></th>
     </tr>
@@ -15,17 +23,18 @@
   <tbody>
     <% @makers.each do |maker| %>
       <tr>
+        <td><%= link_to image_tag( maker.logo.url(:thumb)), maker %></td>
         <td><%= maker.name %></td>
         <td><%= maker.web_url %></td>
-        <td><%= image_tag maker.logo.url(:thumb) %></td>
-        <td><%= link_to 'Show', maker %></td>
-        <td><%= link_to 'Edit', edit_maker_path(maker) %></td>
-        <td><%= link_to 'Destroy', maker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '変更する', edit_maker_path(maker), :class => 'btn btn-primary' %></td>
+        <td><%= link_to '削除する', maker, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
+<%= will_paginate @makers, renderer: BootstrapPagination::Rails, :previous_label => '≪', :next_label => '≫' %>
+
 <br>
 
-<%= link_to 'New Maker', new_maker_path %>
+<%= link_to '登録されていないメーカーを登録', new_maker_path, :class => 'btn btn-primary' %>

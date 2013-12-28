@@ -57,3 +57,18 @@ gem 'therubyracer'
 
 # User paperclip for image uploading function :require ImageMagick (> yum install ImageMagick)
 gem 'paperclip'
+
+# For will-pagenate-bootstrap
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+
+# For updater and creater logging
+gem 'sentient_user', git: "git://github.com/house9/sentient_user.git"
+gem 'clerk', git: "git://github.com/house9/clerk.git"
+
+# For auto-complete (now suspended)
+#gem "jquery-ui-rails"
+#gem "rails3-jquery-autocomplete"
+
+# For search
+gem 'ransack'

@@ -1,5 +1,7 @@
 class UsersLuresController < ApplicationController
   before_action :set_users_lure, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :same_user_check, only: [:edit, :update, :destroy]
 
   # GET /users_lures
   # GET /users_lures.json
@@ -40,6 +42,7 @@ class UsersLuresController < ApplicationController
   # PATCH/PUT /users_lures/1
   # PATCH/PUT /users_lures/1.json
   def update
+
     respond_to do |format|
       if @users_lure.update(users_lure_params)
         format.html { redirect_to root_path, notice: 'ルアーの登録情報が変更されました！' }
@@ -71,4 +74,11 @@ class UsersLuresController < ApplicationController
     def users_lure_params
       params.require(:users_lure).permit(:user_id, :lure_id, :method, :comment, :priority, :color, :field, :photo)
     end
+
+    def same_user_check
+      if (current_user != @users_lure.user)
+        redirect_to root_path;
+      end
+    end
+
 end

@@ -77,4 +77,30 @@ Lurebook::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  # mailer default URL option
+  config.action_mailer.default_url_options = { :host => 'www.lure-book.com0'}
+
+  # asset pipeline setting
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+  config.assets.precompile << ['*.js', '*.css', "*.svg", "*.eot", "*.woff", "*.ttf"]
+
+  # SMTPサーバーの設定
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.smtp_settings = {
+      :address => 'smtp.gmail.com',
+      :port => 587,
+      :domain => 'smtp.gmail.com',
+      :authentication => :plain,
+      :user_name => 'kento6453@gmail.com',
+      :password => 'atenza6453!',
+      :enable_starttls_auto => true
+  }
+
+
+
+
+
 end

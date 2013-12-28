@@ -14,19 +14,45 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name, :class => 'form-control', :placeholder => 'DAIWA' %>
     <p class="help-block">メーカー名は、社名ではなく、ルアーメーカーとしてのブランド名で登録お願いします。</p>
   </div>
+
   <div class="form-group">
-    <%= f.label :web_url %><br>
+    <%= f.label :name_kana %>
+    <%= f.text_field :name_kana, :class => 'form-control', :placeholder => 'ダイワ' %>
+    <p class="help-block">ルアーメーカーのWEBサイトがあれば、URL（アドレス）を入力してください。</p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :web_url %>
     <%= f.text_field :web_url, :class => 'form-control', :placeholder => 'http://daiwa.globeride.co.jp/' %>
     <p class="help-block">ルアーメーカーのWEBサイトがあれば、URL（アドレス）を入力してください。</p>
   </div>
+
   <div class="form-group">
-    <%= f.label :logo %><br />
+    <%= f.label :logo %>
     <%= f.file_field :logo %>
     <p class="help-block">アップする画像を選択してください。メーカーサイトなどでロゴ画像をダウンロードして指定お願いします。</p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :establish %>
+    <%= f.text_field :establish, :class => 'form-control', :placeholder => Time.now.year %>
+    <p class="help-block">設立年を入力</p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :characteristic %>
+    <%= f.text_area :characteristic, :rows => '5', :class => 'form-control' %>
+    <p class="help-block">メーカーの特徴について記載</p>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :history %>
+    <%= f.text_area :history, :rows => '5', :class => 'form-control' %>
+    <p class="help-block">メーカーの歴史について記載</p>
   </div>
 
   <br>

@@ -1,6 +1,18 @@
-<h1>Editing User</h1>
+<div class="page-header">
+  <h1><%= @user.name %>さんのプロファイル</h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active"><%= @user.name %>さん</li>
+</ol>
+
+<% if notice %>
+    <div id="notice" class="alert alert-success"><%= notice %></div>
+<% end %>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<br>
+
+<%= link_to '戻る', @user, :class =>  'btn btn-default' %>

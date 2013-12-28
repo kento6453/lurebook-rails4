@@ -1,11 +1,13 @@
+<% content_for :title do %><%= @lure.name %> | <%= @lure.maker.name %><% end %>
+
 <div class="page-header">
-  <h1><%= @lure.name %>（<%= @lure.maker.name %>）</h1>
+  <h1><%= @lure.name %> | <%= @lure.maker.name %></h1>
 </div>
 
 <ol class="breadcrumb">
   <li><%= link_to 'Top', root_path  %></li>
-  <li><%= link_to '登録ルアー一覧', lures_path  %></li>
-  <li class="active"><%= @lure.name %></li>
+  <li><%= link_to 'カタログ', lures_path  %></li>
+  <li class="active"><%= @lure.name %> | <%= @lure.maker.name %></li>
 </ol>
 
 <% if notice %>
@@ -18,18 +20,25 @@
     <p>
       <%= image_tag @lure.photo.url, :width => '450', :class => 'img-thumbnail' %>
     </p>
-  </div>
 
-  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">カナ</div>
+      <div class="panel-body"><%= @lure.name_kana %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">発売</div>
+      <div class="panel-body"><%= @lure.release_year %>年</div>
+    </div>
 
     <div class="panel panel-default">
       <div class="panel-heading">ジャンル</div>
-      <div class="panel-body"><%= @lure.genre %></div>
+      <div class="panel-body"><%= @lure.genre_name %></div>
     </div>
 
     <div class="panel panel-default">
       <div class="panel-heading">種類</div>
-      <div class="panel-body"><%= @lure.kind %></div>
+      <div class="panel-body"><%= @lure.kind_name %></div>
     </div>
 
     <div class="panel panel-default">
@@ -43,9 +52,54 @@
     </div>
 
     <div class="panel panel-default">
-      <div class="panel-heading">購入リンク</div>
-      <div class="panel-body"><%= @lure.buy_link %>g</div>
+      <div class="panel-heading">アクション</div>
+      <div class="panel-body"><%= @lure.action %></div>
     </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">レンジ</div>
+      <div class="panel-body"><%= @lure.range_top %> - <%= @lure.range_btm %> cm</div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">標準フックサイズ</div>
+      <div class="panel-body">#<%= @lure.std_hook %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">飛距離</div>
+      <div class="panel-body"><%= @lure.distance %> m</div>
+    </div>
+
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">特徴</div>
+      <div class="panel-body"><%= @lure.characteristic %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">歴史</div>
+      <div class="panel-body"><%= @lure.history %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">登録者・更新者</div>
+      <div class="panel-body"><%= @lure.creator.name %>、<%= @lure.updater.name %></div>
+    </div>
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading">リンク</div>
+      <div class="panel-body">
+        <%= link_to '動画を見る', @lure.movie_url, :class => 'btn btn-info' if @lure.movie_url != "" %>
+        <%= link_to '購入する', 'http://product.rakuten.co.jp/search/?search_mode=1&q=' + @lure.name , :class => 'btn btn-default' %>
+      </div>
+    </div>
+
 
   </div>
 
@@ -57,6 +111,8 @@
       <ul class="list-inline">
         <li><%= link_to '<span class="glyphicon glyphicon-pencil"></span> 変更する'.html_safe, edit_lure_path(@lure), :class => 'btn btn-primary' %></li>
         <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, root_path, :class => 'btn btn-default' %></li>
+        <li><%= link_to '<span class="glyphicon glyphicon-remove"></span> 削除'.html_safe, @lure, method: :delete, data: { confirm: '本当に削除しますか？' } , :class => 'btn btn-danger'%></li>
+
       </ul>
     </div>
   </div>

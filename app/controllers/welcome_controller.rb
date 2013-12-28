@@ -3,18 +3,21 @@ class WelcomeController < ApplicationController
     
     @user = current_user
 
+    @new_lures = Array.new
+    @new_users_lures = Array.new
 
-    
+    # 最近カタログ登録されたルアー
+    @new_lures = Lure.order(:updated_at).reverse_order.limit(30)
+    # 最近登録されたmyルアー
+    @new_users_lures = UsersLure.order(:updated_at).reverse_order.limit(30)
+
+
     # 自分のルアーリストの表示
     if current_user then
 
       @my_lures = Array.new
       @same_lure_users = Array.new
       @my_lures_id = Array.new
-
-      # 最近登録されたルアー
-      @new_users_lures = UsersLure.order(:updated_at).reverse_order.limit(10)
-
       # 自分のもっているルアー
       @my_lures = @user.users_lures
 

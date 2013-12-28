@@ -1,18 +1,39 @@
-<h1>Listing lures</h1>
+<div class="page-header">
+  <h1>ルアーカタログ</h1>
+</div>
 
-<table>
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active">ルアーカタログ</li>
+</ol>
+
+
+<div class="row">
+  <div class="col-sm-6 col-md-6">
+    <p><%= link_to '新しいルアーを登録する', new_lure_path, :class =>  'btn btn-primary' %></p>
+  </div>
+  <div class="col-sm-6 col-md-6 text-right">
+    <%= search_form_for @search , :html => {:class => 'form-inline'} do |f|%>
+        <div class="form-group">
+            <%= f.text_field :name_or_name_kana_cont,:class => 'form-control', :placeholder => 'ルアーの名前、カナ' %>
+        </div>
+        <%= f.submit '検索', :class => 'btn btn-primary' %>
+
+        <!-- etc... -->
+    <% end %>
+  </div>
+</div>
+
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Genre</th>
-      <th>Kind</th>
-      <th>Maker</th>
-      <th>Price</th>
-      <th>Weight</th>
-      <th>Photo</th>
-      <th>Buy link</th>
-      <th></th>
-      <th></th>
+      <th>名前</th>
+      <th>タイプ</th>
+      <th>メーカー</th>
+      <th>アクション</th>
+      <th>レンジ・飛距離</th>
+      <th>フックサイズ・重量</th>
+      <th>価格</th>
       <th></th>
     </tr>
   </thead>
@@ -20,22 +41,19 @@
   <tbody>
     <% @lures.each do |lure| %>
       <tr>
-        <td><%= lure.name %></td>
-        <td><%= lure.genre %></td>
-        <td><%= lure.kind %></td>
+        <td><%= image_tag lure.photo.url(:thumb) %><br><%= link_to(lure.name, lure) %></td>
+        <td><%= lure.genre_name %><br><%= lure.kind_name %></td>
         <td><%= lure.maker.name %></td>
-        <td><%= lure.price %></td>
-        <td><%= lure.weight %></td>
-        <td><%= image_tag lure.photo.url(:thumb) %></td>
-        <td><%= link_to '購入', lure.buy_link %></td>
-        <td><%= link_to 'Show', lure %></td>
-        <td><%= link_to 'Edit', edit_lure_path(lure) %></td>
-        <td><%= link_to 'Destroy', lure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= lure.action %></td>
+        <td><%= lure.range_top %>～<%= lure.range_btm %>m<br><%= lure.distance %>g</td>
+        <td>#<%= lure.std_hook %><br><%= lure.weight %>g</td>
+        <td><%= number_with_delimiter lure.price %>円</td>
+        <td></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= will_paginate @lures, renderer: BootstrapPagination::Rails, :previous_label => '≪', :next_label => '≫' %>
 
-<%= link_to 'New Lure', new_lure_path %>
+<p><%= link_to '新しいルアーを登録する', new_lure_path, :class =>  'btn btn-primary' %></p>

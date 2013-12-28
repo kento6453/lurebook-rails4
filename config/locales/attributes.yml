@@ -3,21 +3,44 @@ ja:
     attributes:
       user:
         email: メールアドレス
+        name: 名前
+        profile: プロファイル
+        prefecture: 釣行都道府県
+        area: 活動エリア
+        avatar: アバター
         password: パスワード
         password_confirmation: パスワード（再入力）
         remember_me: 次回からパスワード入力を省く      
+
       lure:
         name:     ルアー
+        name_kana:     フリガナ
         genre:    ジャンル
         kind:     種類
         maker: メーカー
         price:     価格
         weight:    重量
+        photo:     画像・写真
         buy_link:  購入リンク
+        characteristic: 特徴
+        distance:  飛距離
+        history:   歴史
+        movie_url:  動画
+        range_top:  レンジ（浅）
+        range_btm:  レンジ（深）
+        release_year: 発売年
+        std_hook: 標準フックサイズ
+        action: アクション
+
       maker:
         name:     メーカー名
+        name_kana:     フリガナ
         web_url:    WEBサイト
         logo:     ロゴ
+        establish: 設立
+        characteristic: 特徴
+        history:   歴史
+
       users_lure:
         user_id:     ユーザー
         lure_id:     ルアー

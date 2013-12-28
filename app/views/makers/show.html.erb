@@ -1,19 +1,70 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title do %><%= @maker.name %><% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @maker.name %>
-</p>
+<div class="page-header">
+  <h1><%= @maker.name %></h1>
+</div>
 
-<p>
-  <strong>Web url:</strong>
-  <%= @maker.web_url %>
-</p>
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li><%= link_to 'メーカー', makers_path  %></li>
+  <li class="active"><%= @maker.name %></li>
+</ol>
 
-<p>
-  <strong>Logo:</strong>
-  <%= @maker.logo.url(:medium) %>
-</p>
+<% if notice %>
+    <div id="notice" class="alert alert-success"><%= notice %></div>
+<% end %>
 
-<%= link_to 'Edit', edit_maker_path(@maker) %> |
-<%= link_to 'Back', makers_path %>
+<div class="row">
+
+  <div class="col-md-6">
+    <p>
+      <%= image_tag @maker.logo.url, :class => 'img-thumbnail' %>
+    </p>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">カナ</div>
+      <div class="panel-body"><%= @maker.name_kana %></div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">WEBサイト</div>
+      <div class="panel-body"><%= @maker.web_url %></div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">設立（年）</div>
+      <div class="panel-body"><%= @maker.establish %></div>
+    </div>
+
+  </div>
+
+  <div class="col-md-6">
+
+    <div class="panel panel-default">
+      <div class="panel-heading">特徴</div>
+      <div class="panel-body"><%= @maker.characteristic %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">歴史</div>
+      <div class="panel-body"><%= @maker.history %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">登録者・更新者</div>
+      <div class="panel-body"><%= @maker.creator.name %>、<%= @maker.updater.name %></div>
+    </div>
+
+
+  </div>
+
+  </div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-block">
+      <ul class="list-inline">
+        <li><%= link_to '<span class="glyphicon glyphicon-pencil"></span> 変更する'.html_safe, edit_maker_path(@maker), :class => 'btn btn-primary' %></li>
+        <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, makers_path, :class => 'btn btn-default' %></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,53 +1,75 @@
-<div class="jumbotron hero-spacer">
   <% if !current_user then %>
-  <h1><%= image_tag('http://www.logomaker.com/logo-images/cc4c2c102da6f6ea.gif', :size => "85x85" ,:alt => 'Lurebook') %>The Best Lure Practices</h1>    
-  <p>あなたの持っているルアーを共有しちゃいましょう！</p>
-  <p><%= link_to 'ログイン', [ :new, :user_session ], :class => "btn btn-primary btn-large" %></p>
-  <p><%= link_to 'ユーザー登録', [ :new, :user_registration ], :class => "btn btn-primary btn-large"  %></p>
-  <p><%= link_to 'パスワード再発行', [ :new, :user_password ], :class => "btn btn-primary btn-large"  %></p>
-  <% else %>
-  <div class="bs-top-callout">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-9">
-          <p class='lead'>あなたのルアー、そのルアーの使い方を登録しましょう！</p>
-        </div>
-        <div class="col-md-3">
-          <div id="social-sharing">
-            <p><%= link_to '自分のルアーを登録', new_users_lure_path, :class => "btn btn-primary btn-large"  %></p>  
+  <div class="jumbotron hero-spacer">
+      <h1><%= image_tag('http://www.logomaker.com/logo-images/6a27bd42bcf9ddf7.gif', :size => "85x85" ,:alt => 'Lurebook') %>みんなでつくるルアーカタログ</h1>
+      <p>あなたの持っているルアーを自慢しちゃいましょう！ついでにあなたのmyルアー整理もできちゃいます！！</p>
+      <p>Lurebookでは、フィールドでアングラー同士が自分のボックスのルアーを見せ合っている場面、釣具店のルアーコーナーで新作や今まで持ったことのないルアーに淡い期待を抱きながら、眺めている場面をWEBで実現したいと思っています。このサービスが長く生きることができれば、ルアーに関する情報を集合地として、未来に残すことができるサービスになれる夢もあります。アングラーの皆さんのモラルの高さと道具を愛する精神で、支えていただきたいサービス。それがLurebookです。</p>
+  </div>
+<% else %>
+  <div class="page-header">
+    <h1><%= current_user.name %>さんの<%= image_tag('http://www.logomaker.com/logo-images/6a27bd42bcf9ddf7.gif', :size => "60x60" ,:alt => 'Lurebook') %></h1>
+      <div id="row">
+        <%= link_to 'myルアーを登録', new_users_lure_path, :class => "btn btn-primary btn-sm"  %>
+        <%= link_to 'カタログを見る', lures_path, :class => "btn btn-default btn-sm"  %>
+        <%= link_to 'myルアーを見る', mylure_path, :class => "btn btn-default btn-sm"  %>
+      </div>
+  </div>
+<% end %>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <h2>最近カタログ登録されたルアー</h2>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row text-center">
+    <% @new_lures.each do |new_lure| %>
+        <div class="col-lg-3 col-md-4 col-sm-6 hero-feature">
+          <div class="thumbnail">
+            <%= image_tag new_lure.photo.url(:medium), :alt => new_lure.name %>
+            <div class="caption">
+              <h4><%= link_to new_lure.name, new_lure %></h4>
+              <p>
+                <span class="label label-default"><%= new_lure.kind_name %></span>
+                <span class="label label-info"><%= new_lure.action %></span>
+              </p>
+              <p><%= truncate(new_lure.characteristic, :length => 80) %></p>
+              <p>
+                <%= link_to '変更', edit_lure_path(new_lure), :class => "btn btn-primary" %>
+                <%= link_to 'Buy', 'http://product.rakuten.co.jp/search/?search_mode=1&q=' + new_lure.name , :class => "btn btn-default", :target => '_blank' %>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>  
-  <% end %>
+    <% end %>
+  </div>
 
-</div>
 
 <div class="row">
   <div class="col-lg-12">
-    <% if current_user then %>
-        <h3>最近登録されたルアー</h3>
-    <% end %>
+    <h2>最近登録されたmyルアー</h2>
   </div>
 </div><!-- /.row -->
 
 <div class="row text-center">
-<% @new_users_lures.each do |new_lure| %>
-    <div class="col-lg-3 col-md-4 hero-feature">
+<% @new_users_lures.each do |new_my_lure| %>
+    <div class="col-lg-3 col-md-4 col-sm-6 hero-feature">
       <div class="thumbnail">
-        <%= image_tag new_lure.photo.url(:medium), :alt => new_lure.lure.name, :size => '800x500' %>
+        <%= image_tag new_my_lure.photo.url(:medium), :alt => new_my_lure.lure.name %>
         <div class="caption">
-          <h3><%= new_lure.lure.name %> (<%= new_lure.user.name %>さん)</h3>
-          <p>使い方：<%= new_lure.method %></p>
-          <p>コメント：<%= new_lure.comment %></p>
-          <p>頻度：<%= new_lure.priority %></p>
-          <p>カラー：<%= new_lure.color %></p>
-          <p>フィールド：<%= new_lure.field %></p>
+          <h4><%= link_to new_my_lure.user.name + "さんの" + new_my_lure.lure.name, new_my_lure %></h4>
           <p>
-            <%= link_to 'Like!', new_lure.lure.buy_link, :class => "btn btn-primary" %>
-            <%= link_to 'Get!', new_lure.lure.buy_link, :class => "btn btn-primary" %>
-            <%= link_to 'Buy', new_lure.lure.buy_link, :class => "btn btn-primary" %>
+            <span class="label label-primary"><%= new_my_lure.priority_name %></span>
+            <span class="label label-info"><%= new_my_lure.color %></span>
+            <span class="label label-default"><%= new_my_lure.field %></span>
+          </p>
+          <p><%= truncate(new_my_lure.method + new_my_lure.comment, :length => 80) %></p>
+          <p>
+            <!--
+            <%= link_to 'Like!', new_my_lure.lure.buy_link, :class => "btn btn-primary" %>
+            <%= link_to 'Get!', new_my_lure.lure.buy_link, :class => "btn btn-primary" %>
+            -->
+            <%= link_to '買う', 'http://product.rakuten.co.jp/search/?search_mode=1&q=' + new_my_lure.lure.name , :class => "btn btn-primary", :target => '_blank' %>
           </p>
         </div>
       </div>
@@ -60,7 +82,7 @@
 <div class="row">
   <div class="col-lg-12">
     <% if current_user then %>
-    <h3><%= @user.email %>さんのLurebook</h3>
+    <h2><%= @user.name %>さんのmyルアー</h2>
     <% end %>
   </div>
 </div><!-- /.row -->
@@ -73,15 +95,16 @@
       <% @my_lures.each do |my_lure| %>
           <div class="col-lg-3 col-md-4 hero-feature">
             <div class="thumbnail">
-              <%= image_tag my_lure.photo.url(:medium), :size => '800x500', :alt => my_lure.lure.name %>
+              <%= image_tag my_lure.photo.url(:medium), :alt => my_lure.lure.name %>
               <div class="caption">
-                <h3><%= my_lure.lure.name %></h3>
-                <p><%= my_lure.method %> <%= my_lure.comment %></p>
-                <p><%= my_lure.comment %></p>
-                <p><%= my_lure.priority %></p>
-                <p><%= my_lure.color %></p>
-                <p><%= my_lure.field %></p>
-                <p><%= link_to 'Edit', edit_users_lure_path(my_lure), :class => "btn btn-primary" %> <%= link_to 'Destroy', my_lure, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %></p>
+                <h4><%= my_lure.lure.name %></h4>
+                <p>
+                  <span class="label label-primary"><%= my_lure.priority_name %></span>
+                  <span class="label label-info"><%= my_lure.color %></span>
+                  <span class="label label-default"><%= my_lure.field %></span>
+                </p>
+                <p><%= truncate(my_lure.method + my_lure.comment, :length => 80) %></p>
+                <p><%= link_to '変更', edit_users_lure_path(my_lure), :class => "btn btn-primary" %></p>
               </div>
             </div>
           </div>
@@ -90,32 +113,34 @@
 </div><!-- /.row -->
 <!-- /Lure List -->
 <hr>
-  
+
 <div class="row">
   <div class="col-lg-12">
-    <h3>同じルアーを持っているアングラー</h3>
+    <h2>他のアングラーの同じルアー</h2>
   </div>
 </div><!-- /.row -->  
 
 <!-- Same Lure List -->
-<div class="row text-center">
+<div class="row text-left">
   <table class="table">
     <thead>
-      <tr><th>Email</th><th>Lure Name</th><th>Method</th><th>Field</th></tr>
+      <tr>
+        <th>ルアー</th>
+        <th>アングラー</th>
+        <th>使い方</th>
+        <th>エリア</th></tr>
     </thead>
     <tbody>
     <% @same_lure_users.each do |same_lure_user| %>  
     <tr>
+      <td><%= image_tag same_lure_user.lure.photo(:thumb) %><br><%= same_lure_user.lure.name %></td>
       <td><%= same_lure_user.user.name %></td>
-      <td><%= same_lure_user.lure.name %></td>
       <td><%= same_lure_user.method %></td>
       <td><%= same_lure_user.field %></td>
-      <td><%= image_tag same_lure_user.user.avatar.url(:thumb) %></td>
     </tr>
     <% end %>
     </tbody>
 </table>
-
 </div><!-- /.row --><!-- Same Lure List -->
 
 <% end %>

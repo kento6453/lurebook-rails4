@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131218071250) do
+ActiveRecord::Schema.define(version: 20131226063250) do
 
   create_table "lures", force: true do |t|
     t.string   "name"
@@ -27,6 +27,18 @@ ActiveRecord::Schema.define(version: 20131218071250) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "movie_url"
+    t.string   "action"
+    t.integer  "std_hook"
+    t.integer  "range_top"
+    t.integer  "range_btm"
+    t.float    "distance"
+    t.text     "history"
+    t.text     "characteristic"
+    t.integer  "release_year"
+    t.string   "name_kana"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "makers", force: true do |t|
@@ -39,6 +51,12 @@ ActiveRecord::Schema.define(version: 20131218071250) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.text     "history"
+    t.text     "characteristic"
+    t.integer  "establish"
+    t.string   "name_kana"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
   end
 
   create_table "users", force: true do |t|
@@ -61,6 +79,7 @@ ActiveRecord::Schema.define(version: 20131218071250) do
     t.string   "name"
     t.text     "profile"
     t.string   "area"
+    t.string   "prefecture"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

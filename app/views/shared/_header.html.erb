@@ -13,16 +13,17 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'ルアー登録', [ :new, :lure ] %></li>
-        <li><%= link_to 'メーカー登録', [ :new, :maker ] %></li>
-        <li><%= link_to 'ルアー一覧',  lures_path %></li>
-        <li><%= link_to 'メーカー一覧',  makers_path %></li>
-        <li><%= link_to 'ユーザ一覧',  users_path  %></li>
+        <li><%= link_to 'カタログ',  lures_path %></li>
+        <li><%= link_to 'メーカー',  makers_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-        <li><%= link_to('ログアウト', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') %></li>
+            <li><%= link_to('myルアー', {:controller => 'mylure' }, :class => 'signOut') %></li>
+            <li><%= link_to(current_user.name, user_path(current_user), :class => 'signOut') %></li>
+            <li><%= link_to('ログアウト', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') %></li>
         <% else %>
         <li><%= link_to('ログイン', [ :new, :user_session ], :class => "singIn") %></li>
-        <% end %> 
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->

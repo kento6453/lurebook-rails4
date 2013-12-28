@@ -1,4 +1,6 @@
 <%= form_for(@user) do |f| %>
+<fieldset>
+
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -12,31 +14,42 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class => 'form-control', :placeholder => 'あなたの名前' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, :class => 'form-control', :placeholder => 'hoge-angler@lure-book.com' %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :profile %><br>
-    <%= f.text_area :profile %>
+    <%= f.text_area :profile, :class => 'form-control', :rows => 5, :placeholder => 'あなたのプロファイル' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
+    <%= f.label :prefecture %>
+    <div>
+      <% @user.prefecture_list.each do |k,v| %>
+          <label class="checkbox-inline" for="user_prefecture_<%= k %>"><%= f.check_box :prefecture,{'id' => 'user_prefecture_' + k ,'name'=>'prefecture[prefecture][]'},k  %><%= v %></label>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="form-group">
     <%= f.label :area %><br>
-    <%= f.text_field :area %>
+    <%= f.text_field :area, :class => 'form-control', :placeholder => '○○川、○○湾などメインの釣行エリア等をフリー入力' %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :avatar %><br />
     <%= f.file_field :avatar %>
+    <p class="help-block">アップする画像を選択してください。</p>
   </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.button '<span class="glyphicon glyphicon-floppy-disk"></span> 保存する'.html_safe ,:class => "btn btn-primary" %>
+
+</fieldset>
 <% end %>

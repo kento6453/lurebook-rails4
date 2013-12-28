@@ -4,10 +4,20 @@
 
 <ol class="breadcrumb">
   <li><%= link_to 'Top', root_path  %></li>
+  <li><%= link_to 'メーカー', makers_path  %></li>
   <li class="active"><%= @maker.name %>の変更（<%= current_user.name %>さん）</li>
 </ol>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @maker %> |
-<%= link_to 'Back', makers_path %>
+<br>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-block">
+      <ul class="list-inline">
+        <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, @maker, :class => 'btn btn-default' %></li>
+      </ul>
+    </div>
+  </div>
+</div>

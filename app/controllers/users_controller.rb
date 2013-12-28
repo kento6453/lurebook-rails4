@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:edit, :update]
+  before_action :same_user_check, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -31,7 +33,16 @@ class UsersController < ApplicationController
     end
   end
 
- 
+  # DELETE /users/1
+  # DELETE /users/1.json
+  def destroy
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to destory_user_session_path }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -40,6 +51,13 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :web_url, :logo, :avatar)
+      params.require(:user).permit(:name, :email, :profile, :prefecture, :area, :avatar)
     end
+
+    def same_user_check
+      if (current_user != @user)
+        redirect_to root_path;
+      end
+    end
+
 end

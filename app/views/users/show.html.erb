@@ -1,14 +1,59 @@
+<div class="page-header">
+  <h1><%= @user.name %>さんのプロファイル</h1>
+</div>
+
+<ol class="breadcrumb">
+  <li><%= link_to 'Top', root_path  %></li>
+  <li class="active"><%= @user.name %></li>
+</ol>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<div class="row">
 
-<p>
-  <%= image_tag @user.avatar.url(:thumb) %>
-</p>
+  <div class="col-md-6">
+    <p>
+      <%= image_tag @user.avatar.url, :class => 'img-thumbnail' %>
+    </p>
+  </div>
 
+  <div class="col-md-6">
+    <% if current_user == @user then %>
+    <div class="panel panel-default">
+      <div class="panel-heading">メールアドレス</div>
+      <div class="panel-body"><%= @user.email %></div>
+    </div>
+    <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <div class="panel panel-default">
+      <div class="panel-heading">プロファイル</div>
+      <div class="panel-body"><%= @user.profile %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">釣行都道府県</div>
+      <div class="panel-body"><%= @user.prefecture %></div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">活動エリア</div>
+      <div class="panel-body"><%= @user.area %></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-block">
+      <ul class="list-inline">
+        <li><%= link_to '<span class="glyphicon glyphicon-pencil"></span> 変更する'.html_safe, edit_user_path(@user), :class => 'btn btn-primary' %></li>
+        <li><%= link_to '<span class="glyphicon glyphicon-pencil"></span> パスワード変更'.html_safe, edit_user_password_path(@user), :class => 'btn btn-info' %></li>
+        <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, root_path, :class => 'btn btn-default' %></li>
+        <li><%= link_to '削除する', @user, method: :delete, data: { confirm: '本当にユーザー情報を削除しますか？' }, :class => 'btn btn-danger' %></li>
+
+      </ul>
+    </div>
+  </div>
+</div>

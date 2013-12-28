@@ -1,5 +1,5 @@
 <div class="page-header">
-<h1>編集 - あなたのルアー</h1>
+<h1>編集 - <%= current_user.name %>さんのルアー</h1>
 </div>
 
 <ol class="breadcrumb">
@@ -9,10 +9,14 @@
 
 <%= render 'form' %>
 
+<br>
 
-<div class="col-md-12">
-    <p class="text-left">
-    <%= link_to 'Show', @users_lure, :class => 'btn btn-link' %>
-    <%= link_to 'Back', users_lures_path, :class => 'btn btn-link' %>
-    </p>
+<div class="row">
+  <div class="col-md-12">
+    <div class="btn-block">
+      <ul class="list-inline">
+        <li><%= link_to '<span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る'.html_safe, users_lure_path, :class => 'btn btn-default' %></li>
+      </ul>
+    </div>
+  </div>
 </div>

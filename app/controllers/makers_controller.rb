@@ -1,10 +1,11 @@
 class MakersController < ApplicationController
   before_action :set_maker, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /makers
   # GET /makers.json
   def index
-    @makers = Maker.all
+    @makers = Maker.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /makers/1
@@ -69,6 +70,6 @@ class MakersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def maker_params
-      params.require(:maker).permit(:name, :web_url, :logo)
+      params.require(:maker).permit(:name, :web_url, :logo, :history, :characteristic, :establish, :name_kana)
     end
 end

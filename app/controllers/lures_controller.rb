@@ -1,10 +1,13 @@
 class LuresController < ApplicationController
   before_action :set_lure, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /lures
   # GET /lures.json
   def index
-    @lures = Lure.all
+    @search = Lure.search(params[:q])
+    @lures = @search.result.paginate(:page => params[:page], :per_page => 10)
+#    @lures = Lure.all.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /lures/1
@@ -15,7 +18,7 @@ class LuresController < ApplicationController
   # GET /lures/new
   def new
     @lure = Lure.new
-  end
+end
 
   # GET /lures/1/edit
   def edit
@@ -69,6 +72,10 @@ class LuresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lure_params
-      params.require(:lure).permit(:name, :genre, :kind, :maker_id, :price, :weight, :buy_link, :photo)
+      params.require(:lure).permit(
+          :name, :genre, :kind, :maker_id, :price, :weight, :buy_link, :photo,
+          :action, :characteristic, :distance, :history, :movie_url,
+          :range_top, :range_btm, :release_year, :std_hook, :name_kana
+      )
     end
 end
