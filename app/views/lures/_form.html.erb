@@ -3,7 +3,7 @@
 
   <% if @lure.errors.any? %>
     <div class="alert alert-danger" id="error_explanation">
-      <h2><%= pluralize(@lure.errors.count, "error") %> prohibited this lure from being saved:</h2>
+      <h4><%= @lure.errors.count %> 件のエラーがあります。</h4>
 
       <ul>
       <% @lure.errors.full_messages.each do |msg| %>
@@ -13,95 +13,118 @@
     </div>
   <% end %>
 
-
-  <div class="form-group">
-    <%= f.label :maker %>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:maker) %>">
+    <%= f.label :maker, :class => "control-label" %>
     <%= f.collection_select :maker_id, Maker.all, :id, :name, {} ,{:class => 'form-control'} %>
-    <p class="help-block">メーカーは、登録されているメーカーから選択します。登録したいルアーのメーカーが一覧にない場合は、<%= link_to '≪こちら≫', new_maker_path %>からまずメーカー情報を登録してください。</p>
+    <p class="help-block">登録したいルアーのメーカーが一覧にない場合は、<%= link_to '≪こちら≫', new_maker_path %>からまずメーカー情報を登録してください。</p>
   </div>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, :class => "form-control", :placeholder => "ルアーの名前を登録してください" %>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:name) %>">
+    <%= f.label :name, :class => "control-label" %>
+    <%= f.text_field :name, :class => "form-control", :placeholder => "例：komomo SF-125" %>
   </div>
-  <div class="form-group">
-    <%= f.label :name_kana %>
-    <%= f.text_field :name_kana, :class => "form-control", :placeholder => "ルアーのフリガナを登録してください" %>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:name_kana) %>">
+    <%= f.label :name_kana, :class => "control-label" %>
+    <%= f.text_field :name_kana, :class => "form-control", :placeholder => "例：コモモエスエフ125" %>
+    <p class="help-block">カナ・数字のみ</p>
   </div>
-  <div class="form-group">
-    <%= f.label :genre %>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:genre) %>">
+    <%= f.label :genre, :class => "control-label" %>
     <%= f.select :genre ,  @lure.genre_list.map {|k,v| [v,k] }, {}, {:class => 'form-control'} %>
   </div>
-  <div class="form-group">
-    <%= f.label :kind %>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:kind) %>">
+    <%= f.label :kind, :class => "control-label" %>
     <%= f.select :kind,  @lure.kind_list.map {|k,v| [v,k] }, {}, {:class => 'form-control'} %>
   </div>
-  <div class="form-group">
-    <%= f.label :action %>
-    <%= f.text_field :action, :class => "form-control", :placeholder => "ローリング、ウォブリングなど" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :release_year %>
-    <%= f.text_field :release_year, :class => "form-control", :placeholder => Time.now.year %>
-    <p class="help-block">発売年を西暦で入力</p>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:photo) %>">
+    <%= f.label :photo, :class => "control-label" %><br />
+    <%= f.file_field :photo %>
+    <p class="help-block">アップする画像を選択してください。</p>
   </div>
 
-  <div class="form-group">
-    <%= f.label :history %>
-    <%= f.text_area :history ,:rows => '5', :class => 'form-control' %>
-    <p class="help-block">このルアーの歴史が分かるように入力</p>
-  </div>
-  <div class="form-group">
-    <%= f.label :characteristic %>
-    <%= f.text_area :characteristic ,:rows => '5', :class => 'form-control' %>
-    <p class="help-block">このルアーの特徴などを入力</p>
+  <div class="alert alert-info">ここから下の項目は任意です。</div>
+
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:action) %>">
+    <%= f.label :action, :class => "control-label" %>
+    <%= f.text_field :action, :class => "form-control", :placeholder => "例：ローリング、ウォブリングなど" %>
   </div>
 
-
-  <div class="form-group">
-    <%= f.label :price %>
-    <%= f.number_field :price , :class => 'form-control'%>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:price) %>">
+    <%= f.label :price, :class => "control-label" %>
+    <div class="input-group">
+    <%= f.number_field :price , :class => 'form-control', :placeholder => '例：1900', :min => 1 %>
+    <span class="input-group-addon">円</span>
+    </div>
     <p class="help-block">単位（円） で数字のみ入力</p>
   </div>
-  <div class="form-group">
-    <%= f.label "レンジ（浅～深）" %>
+
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:range_top) %>">
+    <%= f.label "レンジ（浅～深）", :class => "control-label" %>
     <div class="row">
-      <div class="col-xs-4">
-        <%= f.number_field :range_top, :class => 'form-control', :placeholder => '15' %>
+      <div class="col-xs-4 input-group">
+        <%= f.number_field :range_top, :class => 'form-control', :placeholder => '例：15', :min => 0 %>
+        <span class="input-group-addon">cm</span>
       </div>
       <div class="col-xs-1">
         <p class="text-center">～</p>
       </div>
-      <div class="col-xs-4">
-        <%= f.number_field :range_btm, :class => 'form-control', :placeholder => '40' %>
+      <div class="col-xs-4 input-group">
+        <%= f.number_field :range_btm, :class => 'form-control', :placeholder => '例：40', :min => 0 %>
+        <span class="input-group-addon">cm</span>
         </div>
     </div>
     <p class="help-block">単位[cm]でトップ、ボトムの順で入力</p>
   </div>
-  <div class="form-group">
-    <%= f.label :std_hook %>
-    <%= f.number_field :std_hook, :class => 'form-control', :placeholder => '4' %>
-    <p class="help-block">標準フックサイズで数字のみ入力</p>
-  </div>
-  <div class="form-group">
-    <%= f.label :weight %>
-    <%= f.number_field :weight, :class => 'form-control', :placeholder => '4' %>
+
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:weight) %>">
+    <%= f.label :weight, :class => "control-label" %>
+    <div class="input-group">
+    <%= f.number_field :weight, :class => 'form-control', :placeholder => '例：15' , :step => 0.1, :min => 1 %>
+    <span class="input-group-addon">g</span>
+    </div>
     <p class="help-block">単位[g]でルアーウェイトを入力</p>
   </div>
-  <div class="form-group">
-    <%= f.label :distance %>
-    <%= f.number_field :distance, :class => 'form-control', :placeholder => '40' %>
+
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:std_hook) %>">
+    <%= f.label :std_hook, :class => "control-label" %>
+    <div class="input-group">
+      <span class="input-group-addon">#</span>
+      <%= f.number_field :std_hook, :class => 'form-control', :placeholder => '例：6', :min => 0, :max => 10 %>
+    </div>
+    <p class="help-block">標準フックサイズで数字のみ入力</p>
+  </div>
+
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:distance) %>">
+    <%= f.label :distance, :class => "control-label" %>
+    <div class="input-group">
+    <%= f.number_field :distance, :class => 'form-control', :placeholder => '例：40', :min => 1 %>
+    <span class="input-group-addon">m</span>
+    </div>
     <p class="help-block">単位[m]で数字のみ入力</p>
   </div>
-  <div class="form-group">
-    <%= f.label :photo %><br />
-    <%= f.file_field :photo %>
-    <p class="help-block">アップする画像を選択してください。</p>
-  </div>
-  <div class="form-group">
-    <%= f.label :movie_url %><br />
-    <%= f.text_field :movie_url, :class => "form-control", :placeholder => "http://xxxx.co.jp/xxxx/" %>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:movie_url) %>">
+    <%= f.label :movie_url, :class => "control-label" %><br />
+    <%= f.text_field :movie_url, :class => "form-control", :placeholder => "例：http://xxxx.co.jp/xxxx/" %>
     <p class="help-block">リンクさせる動画のアドレスを入力してください</p>
   </div>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:release_year) %>">
+    <%= f.label :release_year, :class => "control-label" %>
+    <div class="input-group">
+      <%= f.text_field :release_year, :class => "form-control", :placeholder => "例：2014" %>
+      <span class="input-group-addon">年</span>
+    </div>
+    <p class="help-block">発売年を西暦で入力</p>
+  </div>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:history) %>">
+    <%= f.label :history, :class => "control-label" %>
+    <%= f.text_area :history ,:rows => '5', :class => 'form-control' %>
+    <p class="help-block">このルアーの生まれた経緯や、シリーズルアーの変遷について</p>
+  </div>
+  <div class="form-group <%= "has-error" if @lure.errors.include?(:characteristic) %>">
+    <%= f.label :characteristic, :class => "control-label" %>
+    <%= f.text_area :characteristic ,:rows => '5', :class => 'form-control' %>
+    <p class="help-block">このルアーの特徴など</p>
+  </div>
+
 
   <br>
 

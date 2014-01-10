@@ -7,23 +7,23 @@
   <li class="active">ルアーカタログ</li>
 </ol>
 
-
 <div class="row">
-  <div class="col-sm-6 col-md-6">
-    <p><%= link_to '新しいルアーを登録する', new_lure_path, :class =>  'btn btn-primary' %></p>
+  <div class="col-xs-6 col-sm-6 col-md-6">
+    <p><%= link_to '新しいルアーを登録する&nbsp;&raquo;'.html_safe, new_lure_path, :class =>  'btn btn-primary' %></p>
   </div>
-  <div class="col-sm-6 col-md-6 text-right">
+  <div class="col-xs-6 col-sm-6 col-md-6 text-right">
     <%= search_form_for @search , :html => {:class => 'form-inline'} do |f|%>
-        <div class="form-group">
+        <div class="input-group">
             <%= f.text_field :name_or_name_kana_cont,:class => 'form-control', :placeholder => 'ルアーの名前、カナ' %>
+            <span class="input-group-btn">
+            <%= f.submit '検索', :class => 'btn btn-primary' %>
+            </span>
         </div>
-        <%= f.submit '検索', :class => 'btn btn-primary' %>
-
-        <!-- etc... -->
     <% end %>
   </div>
 </div>
 
+<div class="table-responsive">
 <table class="table">
   <thead>
     <tr>
@@ -53,7 +53,8 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <%= will_paginate @lures, renderer: BootstrapPagination::Rails, :previous_label => '≪', :next_label => '≫' %>
 
-<p><%= link_to '新しいルアーを登録する', new_lure_path, :class =>  'btn btn-primary' %></p>
+<p><%= link_to '新しいルアーを登録する&nbsp;&raquo;'.html_safe, new_lure_path, :class =>  'btn btn-primary' %></p>

@@ -28,6 +28,9 @@ class WelcomeController < ApplicationController
 
       @same_lure_users = UsersLure.where('lure_id IN(?) and user_id <> (?)', @my_lures_id, current_user.id).uniq
 
+      # ルアーカタログの登録数
+      @all_lure_cnt = Lure.all.size
+
     end 
 
   end

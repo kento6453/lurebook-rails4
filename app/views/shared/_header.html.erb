@@ -13,13 +13,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to 'カタログ',  lures_path %></li>
-        <li><%= link_to 'メーカー',  makers_path %></li>
+        <li><%= link_to( '<span class="glyphicon glyphicon-book"></span> '.html_safe << 'ルアーカタログ',  lures_path ) %></li>
+        <% if current_user %>
+            <li><%= link_to( '<span class="glyphicon glyphicon-briefcase"></span> '.html_safe << 'myルアーボックス', {:controller => 'mylure' }) %></li>
+        <% end %>
+        <li><%= link_to( '<span class="glyphicon glyphicon-copyright-mark"></span> '.html_safe << 'メーカー',  makers_path) %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-            <li><%= link_to('myルアーボックス', {:controller => 'mylure' }, :class => 'signOut') %></li>
-            <li><%= link_to(current_user.name, user_path(current_user), :class => 'signOut') %></li>
+            <li><%= link_to( '<span class="glyphicon glyphicon-user"></span> '.html_safe << current_user.name, user_path(current_user), :class => 'signOut') %></li>
+<!--            <li><%= link_to( '<span class="glyphicon glyphicon-user"></span> '.html_safe << "ヘルプ", user_path(current_user), :class => 'signOut') %></li>　-->
             <li><%= link_to('ログアウト', [ :destroy, :user_session ], :method => :delete, :class => 'signOut') %></li>
         <% else %>
         <li><%= link_to('ログイン', [ :new, :user_session ], :class => "singIn") %></li>

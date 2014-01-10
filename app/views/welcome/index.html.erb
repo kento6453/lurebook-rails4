@@ -1,30 +1,34 @@
-  <% if !current_user then %>
+<% if !current_user then %>
   <div class="jumbotron hero-spacer">
       <h1><%= image_tag('http://www.logomaker.com/logo-images/6a27bd42bcf9ddf7.gif', :size => "85x85" ,:alt => 'Lurebook') %>みんなでつくるルアーカタログ</h1>
       <p>あなたの持っているルアーを自慢しちゃいましょう！ついでにあなたのmyルアー整理もできちゃいます！！</p>
-      <p>Lurebookでは、フィールドでアングラー同士が自分のボックスのルアーを見せ合っている場面、釣具店のルアーコーナーで新作や今まで持ったことのないルアーに淡い期待を抱きながら、眺めている場面をWEBで実現したいと思っています。このサービスが長く生きることができれば、ルアーに関する情報を集合地として、未来に残すことができるサービスになれる夢もあります。アングラーの皆さんのモラルの高さと道具を愛する精神で、支えていただきたいサービス。それがLurebookです。</p>
   </div>
+  <p>Lurebookでは、フィールドでアングラー同士が自分のボックスのルアーを見せ合っている場面、釣具店のルアーコーナーで新作や今まで持ったことのないルアーに淡い期待を抱きながら、眺めている場面をWEBで実現したいと思っています。このサービスが長く生きることができれば、ルアーに関する情報を集合地として、未来に残すことができるサービスになれる夢もあります。アングラーの皆さんのモラルの高さと道具を愛する精神で、支えていただきたいサービス。それがLurebookです。</p>
+  <%= link_to "ユーザー登録して参加する&nbsp;&raquo;".html_safe, new_registration_path(:user) ,:class => "btn-btn-primary" %>
+
 <% else %>
   <div class="page-header">
-    <h1><%= current_user.name %>さんの<%= image_tag('http://www.logomaker.com/logo-images/6a27bd42bcf9ddf7.gif', :size => "60x60" ,:alt => 'Lurebook') %></h1>
-    <% if current_user.avatar == "" or current_user.profile == "" then %>
-        <div id="row">
-          <div class="alert alert-info">
-            <p><%= link_to(current_user.name + 'さんのアバター、プロファイルを登録しませんか？', user_path(current_user), :class => 'btn btn-link') %></p>
-          </div>
+    <div id="row">
+      <div class="panel panel-info">
+        <div class="panel-heading">Lurebookからのお知らせ　<strong>現在のルアーカタログ登録件数：<%= @all_lure_cnt %></strong></div>
+        <div class="panel-body">
+          <ul class="list-group">
+              <% if current_user.avatar_file_name.blank? or current_user.profile.blank? then %>
+              <li class="list-group-item"><span class="glyphicon glyphicon-info-sign">&nbsp;</span><%= link_to(current_user.name + 'さんのアバター、プロファイルを登録しませんか？', user_path(current_user)) %></li>
+              <% end %>
+            <li class="list-group-item"><span class="glyphicon glyphicon-hand-right">&nbsp;</span>まずは［ルアーを登録］でカタログにルアーを登録　⇒　次に［myルアーを登録］でmyルアーボックスにルアー追加しましょう！</li>
+          </ul>
+          <ul class="list-inline">
+            <li><%= link_to 'ルアーを登録&nbsp;&raquo;'.html_safe, new_lure_path, :class => "btn btn-primary btn-sm" %></li>
+            <li><%= link_to 'myルアーを登録&nbsp;&raquo;'.html_safe, new_users_lure_path, :class => "btn btn-primary btn-sm"  %></li>
+            <li><%= link_to 'カタログを見る&nbsp;&raquo;'.html_safe, lures_path, :class => "btn btn-default btn-sm" %></li>
+          </ul>
         </div>
-    <% end %>
-      <div id="row">
-        <div class="alert alert-info">
-          <p>まずは［ルアーを登録］でカタログにルアーを登録　⇒　次に［myルアーを登録］でmyルアーボックスにルアー追加しましょう！</p>
-        </div>
+
       </div>
 
-      <div id="row">
-        <%= link_to 'ルアーを登録', new_lure_path, :class => "btn btn-primary btn-sm" %>
-        <%= link_to 'myルアーを登録', new_users_lure_path, :class => "btn btn-primary btn-sm"  %>
-        <%= link_to 'カタログを見る', lures_path, :class => "btn btn-default btn-sm" %>
-      </div>
+    </div>
+
   </div>
 <% end %>
 
@@ -48,8 +52,8 @@
               </p>
               <p><%= truncate(new_lure.characteristic, :length => 80) %></p>
               <p>
-                <%= link_to '変更', edit_lure_path(new_lure), :class => "btn btn-primary" %>
-                <%= link_to 'Buy', 'http://product.rakuten.co.jp/search/?search_mode=1&q=' + new_lure.name , :class => "btn btn-default", :target => '_blank' %>
+                <%= link_to '見る', lure_path(new_lure), :class => "btn btn-primary" %>
+                <%= link_to '買う', 'http://product.rakuten.co.jp/search/?search_mode=1&q=' + new_lure.name , :class => "btn btn-default", :target => '_blank' %>
               </p>
             </div>
           </div>

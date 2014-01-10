@@ -17,12 +17,13 @@ class Lure < ActiveRecord::Base
   validates :kind, presence: true
   
   # TODO: まともなvalidationが必要かも validates :maker_id, presence: true
-  validates :price, numericality: {greater_than_or_equal_to: 0}
-  validates :weight, numericality: {greater_than_or_equal_to: 0}
+#  TODO: 数値チェックをいれると、ブランクもはじかれてるので、いったん除外
+#   validates :price, numericality: {greater_than_or_equal_to: 0}
+#  validates :weight, numericality: {greater_than_or_equal_to: 0}
   validates :name, uniqueness: true
   validates :name_kana, uniqueness: true
 
-  has_attached_file :photo, :styles => { :medium => '600x400>', :thumb => "120x80>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :photo, :styles => { :medium => '600x400#', :thumb => "120x80#" }, :default_url => "/images/:style/missing.png"
   validates_attachment :photo, presence: true
 #  validates_with AttachmentPresenceValidator, :attributes => :photo
 

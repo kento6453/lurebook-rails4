@@ -7,7 +7,11 @@
   <li class="active">メーカー一覧</li>
 </ol>
 
-<%= link_to '登録されていないメーカーを登録', new_maker_path, :class => 'btn btn-primary' %>
+<div class="row">
+  <div class="col-sm-6 col-md-6">
+    <p><%= link_to '登録されていないメーカーを登録&raquo;'.html_safe, new_maker_path, :class => 'btn btn-primary' %></p>
+  </div>
+</div>
 
 <table class="table">
   <thead>
@@ -26,8 +30,10 @@
         <td><%= link_to image_tag( maker.logo.url(:thumb)), maker %></td>
         <td><%= maker.name %></td>
         <td><%= maker.web_url %></td>
-        <td><%= link_to '変更する', edit_maker_path(maker), :class => 'btn btn-primary' %></td>
-        <td><%= link_to '削除する', maker, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %></td>
+        <td>
+          <%= link_to '変更', edit_maker_path(maker), :class => 'btn btn-primary' %>
+          <%= link_to '削除', maker, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -35,6 +41,8 @@
 
 <%= will_paginate @makers, renderer: BootstrapPagination::Rails, :previous_label => '≪', :next_label => '≫' %>
 
-<br>
-
-<%= link_to '登録されていないメーカーを登録', new_maker_path, :class => 'btn btn-primary' %>
+<div class="row">
+  <div class="col-sm-6 col-md-6">
+    <p><%= link_to '登録されていないメーカーを登録&raquo;'.html_safe, new_maker_path, :class => 'btn btn-primary' %></p>
+  </div>
+</div>
